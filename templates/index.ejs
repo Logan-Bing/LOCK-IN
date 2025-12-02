@@ -1,0 +1,9 @@
+<%- include('./shared/header.ejs') %>
+
+<ul>
+	<% for (const post of posts) { %>
+		<li><%= post.title %></li>
+	<% } %>
+</ul>
+
+<%- include('./shared/footer.ejs') %>
