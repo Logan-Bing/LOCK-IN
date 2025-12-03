@@ -37,7 +37,9 @@ app.setErrorHandler((error, req, res) => {
 
 async function  start () {
 	try {
-		await app.listen({port: 3000})
+		await app.listen({
+			port: 3000
+		})
 	}
 	catch (err)
 	{
