@@ -1,9 +1,10 @@
 <%- include('./shared/header.ejs') %>
 
 <ul>
-	<% for (const post of posts) { %>
-		<li><%= post.title %></li>
-	<% } %>
+	<a href="/new_project" class="btn btn-primary">Ajouter un projet</a>
+	<% for (const project of projects) {%>
+		<%- include('./shared/project.ejs', {project}) %>
+	<%}%>
 </ul>
 
 <%- include('./shared/footer.ejs') %>

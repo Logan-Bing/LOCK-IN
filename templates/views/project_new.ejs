@@ -1,0 +1,24 @@
+<%- include('../shared/header.ejs') %>
+
+
+<div class="container">
+    <h1>Ajoute un nouveau projet</h1>
+    <form action="" method="post">
+        <div class="mb-2">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="form-control" name="title">
+        </div>
+        <div class="mb-2">
+            <label for="description">description</label>
+            <textarea name="description" class="form-control" id="description"></textarea>
+        </div> 
+        <div class="mb-2">
+            <label for="deadline">deadline</label>
+            <input type="date" id="deadline" class="form-control" name="deadline">
+        </div>
+        <button class="mb-4 btn btn-primary">Ajouter un projet</button>
+    </form>
+    <a href="/" class="btn btn-secondary">Back Home</a>
+</div>    
+
+<%- include('../shared/footer.ejs') %>

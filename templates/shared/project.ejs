@@ -1,0 +1,10 @@
+<div>
+    <h1><%= project.title %></h1>
+    <p><%= project.description %></p>
+    <a href="/project/<%=project.id %>" class="btn btn-secondary">Aller au projet</a>
+    <form action="/project/<%= project.id %>/delete" method="post">
+        <button class="btn btn-secondary" style="background-color: red">
+            Delete
+        </button>
+    </form>
+</div>
