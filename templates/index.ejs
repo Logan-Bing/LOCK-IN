@@ -1,6 +1,7 @@
 <%- include('./shared/header.ejs') %>
 
 <ul>
+	<h1>Bonjour <%= user.login %></h1>
 	<a href="/new_project" class="btn btn-primary">Ajouter un projet</a>
 	<% for (const project of projects) {%>
 		<%- include('./shared/project.ejs', {project}) %>

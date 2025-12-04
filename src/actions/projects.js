@@ -2,21 +2,24 @@ import { db } from '../database.js'
 import { RecordNotFoundError } from '../errors/RecordNotFoundError.js'
 
 export function listProjects(req, res) {
+	const {id} = req.session.get('user')
+	const user = db.prepare('SELECT * FROM users WHERE id = ?').get(id)
 	const projects = db.prepare('SELECT * FROM projects ORDER BY created_at DESC').all()
 
 	res.view('templates/index.ejs', {
-		projects
+		projects,
+		user
 	})
 }
 
-export function NewProject(req,res) {
-	res.view('templates/views/project_new.ejs')
+export function newProject(req,res) {
+	res.view('templates/views/project/project_new.ejs')
 }
 
 export function createProject(req, res) {
 	db.prepare('INSERT INTO projects(user_id, title, description, deadline) VALUES (?, ?, ?, ?)')
 	.run(
-		2,
+		7,
 		req.body.title,
 		req.body.description,
 		req.body.deadline
@@ -43,7 +46,7 @@ export function showProject(req, res) {
 	if (project === undefined) {
 		throw new RecordNotFoundError(`Impossible de trouver l'id ${id}`);
 	}
-	res.view('templates/views/project_view.ejs', {
+	res.view('templates/views/project/project_view.ejs', {
 		project
 	})
 }
