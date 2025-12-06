@@ -1,0 +1,25 @@
+<%- include('../../shared/header.ejs') %>
+
+<div class="container">
+    <% if (locals.error) { %>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div> 
+    <% } %>
+    <h1>Se connecter</h1>
+    <form action="" method="post">
+        <div class="mb-2">
+            <label for="login">Login</label>
+            <input type="text" id="login" value="<%= locals.login ?? '' %>" class="form-control" name="login">
+        </div>
+        <div class="mb-2">
+            <label for="password">Password</label>
+            <input name="password" class="form-control" id="password">
+        </div> 
+        <button class="mb-4 btn btn-primary">Connexion</button>
+    </form>
+    <p>Créer un compte</p>
+    <a href="/new_user" class="btn btn-secondary">S'inscire</a>
+</div> 
+
+<%- include('../../shared/footer.ejs') %>

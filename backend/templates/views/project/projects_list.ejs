@@ -1,0 +1,14 @@
+<%- include('../../shared/header.ejs') %>
+<%- include('../../shared/topbar.ejs') %>
+
+<div class="mt-5 container">
+	<a href="/new_project" class="btn btn-primary">Ajouter un projet</a>
+	<ul class="mt-3">
+		<% for (const project of projects) {%>
+			<%- include('../../shared/project.ejs', {project}) %>
+		<%}%>
+	</ul>
+	<div id="calendar"></div>
+</div>
+
+<%- include('../../shared/footer.ejs') %>
