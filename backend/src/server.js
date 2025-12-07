@@ -19,6 +19,19 @@ import { RecordNotFoundError } from "./errors/RecordNotFoundError.js";
 const app = fastify();
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)))
 
+
+const schema = {
+	schema: {
+		body: {
+			content: {
+				'application/json' : {
+					schema: {type: 'object'}
+				}
+			}
+		}
+	}
+}
+
 // REGISTER MODULES
 app.register(fastifySecureSession, {
   sessionName: 'session',
@@ -27,7 +40,13 @@ app.register(fastifySecureSession, {
   expiry: 24 * 60 * 60, // Default 1 day
   cookie: {path: '/'}
 })
-await app.register(cors, { origin: true });
+await app.register(cors, 
+	{ 
+		origin: 'http://localhost:5173',
+		credentials: true
+	}
+
+);
 app.register(fastifyFormbody)
 app.register(fastifyView, {engine: {ejs}})
 app.register(fastifyStatic, {root: join(rootDir, 'public')})
@@ -35,10 +54,9 @@ app.register(fastifyStatic, {root: join(rootDir, 'public')})
 // user request
 app.get('/new_user', newUser)
 app.get ('/success_register', successRegister)
-app.post('/create_user', createUser)
+app.post('/register', createUser)
 app.post('/logout', logout)
-app.get('/', login)
-app.post('/', login)
+app.post('/login', schema, login)
 
 // project request
 app.get('/projects', sendProjects)
@@ -56,10 +74,10 @@ app.setErrorHandler((error, req, res) => {
 		})
 	}
 	console.log(error)
-	res.statusCode = 500
-	return {
-		error: error.message
-	}
+	reply.code(500).send({
+		error: "Internal Error",
+		message: "Une erreur est survenue"
+	})
 })
 
 async function  start () {

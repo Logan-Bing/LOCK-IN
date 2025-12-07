@@ -1,4 +1,3 @@
-import { type } from 'node:os'
 import { db } from '../database.js'
 import { RecordNotFoundError } from '../errors/RecordNotFoundError.js'
 
@@ -14,7 +13,8 @@ export function listProjects(req, res) {
 }
 
 export function sendProjects(req, res) {
-	const projects = db.prepare('SELECT * FROM projects').all()
+	const {id, login} = req.session.get('user')
+	const projects = db.prepare('SELECT * FROM projects WHERE user_id = ?').all(id)
 	return res.send(JSON.stringify(projects))
 }
 
